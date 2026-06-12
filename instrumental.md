@@ -2,9 +2,11 @@ Instrumental — Ecosistema de la Maqueta DWDM
 
 1. Chasis RxT-1200 + Módulo OSA RXT-4510
 Descripción funcional
+
 El VeEX RxT-1200 es un chasis de instrumentación modular portátil. En esta maqueta porta el módulo OSA RXT-4510, un Analizador Óptico de Espectro (OSA) diseñado específicamente para el análisis de sistemas DWDM en banda C y L.
 
 El OSA RXT-4510 realiza un barrido espectral del puerto óptico de monitoreo (MON) del chasis HT6000, detectando y clasificando cada canal DWDM individualmente. Para cada canal reporta:
+
 Longitud de onda del pico (nm)
 Frecuencia central medida (THz)
 Desviación respecto a grilla ITU-T — Delta (nm / GHz)
@@ -14,6 +16,7 @@ BW 3dB (nm)
 
 
 Procedimiento de uso en el laboratorio
+
 - Encender el chasis RxT-1200 con el módulo OSA RXT-4510 instalado.
 - Conectar la fibra desde el puerto MON DWDM 1 del ODF al puerto de entrada del OSA (conector LC/APC azul).
 - Acceder a la interfaz del OSA desde el propio chasis o vía VeEX EZ Remote (IP 192.168.1.202).
@@ -26,7 +29,8 @@ Procedimiento de uso en el laboratorio
 
 
 Fotografía del equipo en operación
-📷 [INSERTAR: dwdm7.jpeg — OSA RxT-1200 mostrando el espectro DWDM con los 8 picos de canal visibles en pantalla]
+
+<img width="668" height="309" alt="dwdm7" src="https://github.com/user-attachments/assets/ef8c980f-34e2-4abb-9cfb-5d58f0a054fa" />
 
 
 
@@ -61,7 +65,8 @@ Procedimiento de uso en el laboratorio
 
 
 Fotografía del equipo en operación
-📷 [INSERTAR: dwdm4.png — Pantalla del MTX150x en la interfaz VeEX Web Remote Access (192.168.1.100), mostrando el menú principal con las opciones de prueba]
+
+<img width="1519" height="968" alt="dwdm4" src="https://github.com/user-attachments/assets/db14fbcc-aa8f-43f3-b254-cfc9fadf3ce2" />
 
 
 
@@ -95,18 +100,25 @@ Repetir el proceso en http://192.168.1.102 para el DWDM 2.
 
 
 Fotografías del NMS en operación
-📷 [INSERTAR: dwdm1.png — Interfaz NMS del DWDM 1 (192.168.1.101): pantalla Slot M con información de la tarjeta HT6000-NMS, S/N 25062310289, y tabla de puertos LAN/SFP]
 
-📷 [INSERTAR: dwdm3.png — Interfaz NMS del DWDM 2 (192.168.1.102): pantalla Slot M con información de la tarjeta HT6000-NMS, S/N 25062310290]
+<img width="767" height="498" alt="dwdm1" src="https://github.com/user-attachments/assets/fcbcbb59-9ab8-44e8-b8e8-f73c2e42fa9e" />
 
-📷 [INSERTAR: dwdm2.png — System Alarm Log del HT6000: historial de alarmas OLP y EDFA con timestamps, slots 08, 09 y 17]
+
+
+<img width="1920" height="1040" alt="dwdm3" src="https://github.com/user-attachments/assets/57642312-5800-4680-96d4-bc2bffc3a664" />
+
+
+<img width="1065" height="618" alt="dwdm2" src="https://github.com/user-attachments/assets/9b51cc63-b2a7-4702-9056-ec42ffd582b8" />
+
 
 
 4. VeEX EZ Remote — Control Remoto desde PC
+5. 
 Descripción funcional
 VeEX EZ Remote es la plataforma web de VeEX Inc. para el acceso y control remoto de los instrumentos MTX150x y OSA RxT-1200/4510 a través de la red LAN del laboratorio. No requiere instalación de software adicional: opera completamente desde el navegador web mediante la interfaz Web Remote Access embebida en cada equipo.
 
 Desde EZ Remote es posible:
+
 Visualizar en tiempo real la pantalla del equipo remoto.
 Ejecutar pruebas (RFC 2544, SAM, barrido OSA) desde el PC.
 Guardar capturas de pantalla (Screen Shots) como evidencia.
@@ -115,12 +127,14 @@ Subir perfiles de prueba preconfigurados (Upload Profile).
 
 
 Configuración del acceso remoto
+
 ParámetroMTX150xOSA RxT-1200Dirección IP192.168.1.100 (acceso web)192.168.1.202URL de accesohttp://192.168.1.100http://192.168.1.202Contraseña de accesopass1pass1Red de gestiónSwitch MikroTik CSS610Switch MikroTik CSS610
 Nota: la IP 192.168.1.100 corresponde al gateway de acceso web del MTX150x (interfaz Web Remote Access). La IP del equipo como instrumento es 192.168.1.201.
 
 
 
 Procedimiento de conexión
+
 Asegurarse de que el PC está en la red 192.168.1.0/24.
 Abrir navegador → ingresar http://192.168.1.100.
 En la pantalla de inicio de VeEX Web Remote Access, seleccionar Remote Control.
@@ -131,4 +145,6 @@ Desde ambas interfaces es posible ejecutar pruebas, capturar pantallas y descarg
 
 Fotografía del software en uso
 
-📷 [INSERTAR: dwdm4.png — Pantalla completa de VeEX Web Remote Access conectado al MTX150x (S/N: TJMA01YB111108), mostrando el menú principal con las opciones Setup, V-SAM, Loopback, RFC 2544, IP, Rendimiento, Herramientas avanzadas y Scan]
+
+<img width="1519" height="968" alt="dwdm4" src="https://github.com/user-attachments/assets/53b0497a-769a-4ebf-8c7c-faa6b1b46a31" />
+
