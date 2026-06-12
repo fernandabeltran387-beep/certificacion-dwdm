@@ -1,72 +1,134 @@
-# Ecosistema de la Maqueta - Instrumental
+Instrumental — Ecosistema de la Maqueta DWDM
 
-## 1. Chasis RXT-1200 + Módulo OSA RXT-4510
+1. Chasis RxT-1200 + Módulo OSA RXT-4510
+Descripción funcional
+El VeEX RxT-1200 es un chasis de instrumentación modular portátil. En esta maqueta porta el módulo OSA RXT-4510, un Analizador Óptico de Espectro (OSA) diseñado específicamente para el análisis de sistemas DWDM en banda C y L.
 
-El chasis RXT-1200 es la plataforma base que aloja el módulo analizador de espectro óptico
-OSA RXT-4510, fabricado por VeEX.
+El OSA RXT-4510 realiza un barrido espectral del puerto óptico de monitoreo (MON) del chasis HT6000, detectando y clasificando cada canal DWDM individualmente. Para cada canal reporta:
+Longitud de onda del pico (nm)
+Frecuencia central medida (THz)
+Desviación respecto a grilla ITU-T — Delta (nm / GHz)
+Potencia óptica (dBm)
+OSNR (dB) en resolución 0,1 nm
+BW 3dB (nm)
 
-**Función principal:**
-- Realiza barrido espectral del enlace DWDM
-- Analiza cada canal individualmente mostrando: potencia, OSNR y frecuencia central
-- Permite identificar canales en PASS o FAIL según umbrales configurados
 
-**Uso en laboratorio:**
-- Conectar al puerto MON del Mux/Demux
-- Ejecutar barrido espectral completo
-- Exportar tabla de resultados por canal
+Procedimiento de uso en el laboratorio
+- Encender el chasis RxT-1200 con el módulo OSA RXT-4510 instalado.
+- Conectar la fibra desde el puerto MON DWDM 1 del ODF al puerto de entrada del OSA (conector LC/APC azul).
+- Acceder a la interfaz del OSA desde el propio chasis o vía VeEX EZ Remote (IP 192.168.1.202).
+- Seleccionar el modo OSA en el menú principal → pantalla de barrido espectral.
+- Configurar el plan de canal: banda C, espaciado 100 GHz, canales C21–C28.
+- Ejecutar Repeat Sweep para barrido continuo o Single Sweep para captura puntual.
+- Verificar que los 8 canales aparecen en el gráfico espectral como picos individuales.
+- Revisar la tabla de resultados: columnas ITU#, Peak(nm), Center(nm), Delta(nm/GHz), Power(dBm), OSNR, BW 3dB.
+- Exportar/capturar pantalla para incluir como evidencia en pruebas.md.
 
-> 📸 *Fotografía pendiente — insertar foto real del equipo en uso*
 
----
+Fotografía del equipo en operación
+📷 [INSERTAR: dwdm7.jpeg — OSA RxT-1200 mostrando el espectro DWDM con los 8 picos de canal visibles en pantalla]
 
-## 2. Analizador Ethernet MTX150x
 
-Tester Ethernet portátil de VeEX para pruebas de rendimiento en redes de 1G y 10G.
 
-**Función principal:**
-- Mide Throughput real de la red
-- Mide latencia en milisegundos
-- Verifica cumplimiento del SLA del enlace
 
-**Uso en laboratorio:**
-- Conectar entre los puertos cliente de los transponders
-- Configurar prueba RFC 2544
-- Registrar resultados de Throughput y latencia
+2. Analizador Ethernet MTX150x
+Descripción funcional
 
-> 📸 *Fotografía pendiente — insertar foto real del equipo en uso*
+El VeEX MTX150x es un analizador Ethernet portátil de doble puerto (P1 y P2) con capacidad de prueba a 1G y 10G (SFP+). En esta maqueta se emplea para validar el SLA del enlace transportado sobre el canal DWDM C21, verificando que el transporte óptico no degrada el rendimiento de la capa Ethernet.
 
----
+El MTX150x puede ejecutar:
+RFC 2544: pruebas de throughput, latencia, frame loss rate y back-to-back en modo loopback.
+ITU-T Y.1564 (SAM): pruebas de configuración y rendimiento de servicios Ethernet.
+Loopback: modo de reflexión para pruebas punto a punto.
+iPerf integrado: medición de ancho de banda TCP/UDP.
 
-## 3. Gestión NMU (HT6000)
 
-Sistema de gestión de red (NMU) de la plataforma HT6000, accesible vía navegador web.
+En la maqueta, el flujo de tráfico sigue el recorrido:
+MTX150x P1 (Tx) → ODF MTX1 → DWDM1 OTU-CLI1 → Fibra 50 km
+                                                      ↓
+MTX150x P2 (Rx) ← ODF MTX2 ← DWDM2 OTU-CLI1 ←──────┘
 
-**Función principal:**
-- Monitoreo en tiempo real de transponders
-- Visualización de alarmas activas
-- Configuración de parámetros de los canales DWDM
+Procedimiento de uso en el laboratorio
+- Conectar el MTX150x a la red de gestión mediante cable Ethernet (IP 192.168.1.201).
+- Acceder vía web desde el PC: http://192.168.1.100 (interfaz VeEX Web Remote Access).
+- En el panel Remote Control, se visualiza la interfaz completa del equipo.
+- Navegar a Setup → IP y verificar que la IP del equipo sea 192.168.1.201, máscara /24, gateway 192.168.1.1.
+- Para prueba de throughput: ir a Rendimiento (T-PUT) o RFC 2544.
+- Seleccionar Puerto P1 como Tx y Puerto P2 como Rx (flujo P1 → P2).
+- Configurar tamaño de trama (64, 128, 256, 512, 1024, 1518 bytes) y duración (10 segundos mínimo por RFC 2544).
+- Iniciar prueba y registrar los resultados: Throughput (Mbps), Latencia (ms), Frame Loss (%).
+- Alternativamente, verificar conectividad vía Ping hacia 192.168.1.10 (PC) como validación rápida.
 
-**Uso en laboratorio:**
-- Acceder vía navegador con la IP del equipo
-- Verificar estado de cada transpondedor
-- Revisar alarmas y niveles de potencia
 
-> 📸 *Fotografía pendiente — insertar captura de pantalla del sistema*
+Fotografía del equipo en operación
+📷 [INSERTAR: dwdm4.png — Pantalla del MTX150x en la interfaz VeEX Web Remote Access (192.168.1.100), mostrando el menú principal con las opciones de prueba]
 
----
 
-## 4. VeEX EZ Remote
 
-Software de control remoto para operar los equipos VeEX (RXT-1200 y MTX150x) desde un PC.
 
-**Función principal:**
-- Acceso y control remoto de los instrumentos
-- Visualización de resultados en pantalla del PC
-- Permite guardar y exportar mediciones
+3. Gestión NMS — Plataforma HT6000 (HT6000-NMS)
+Descripción funcional
 
-**Uso en laboratorio:**
-- Instalar y configurar EZ Remote en el PC
-- Conectar vía red al equipo
-- Ejecutar pruebas y guardar capturas
+El sistema de gestión NMS del HT6000 es una interfaz web embebida en la tarjeta HT6000-NMS (Card PN: HT6000-NMS, Hardware v1.8, Software v5.91) instalada en el slot M de cada chasis. Permite el monitoreo y configuración completa de todos los módulos del sistema DWDM: transponders OTU, módulos EDFA, OLP y amplificadores.
 
-> 📸 *Fotografía pendiente — insertar captura de pantalla del software*
+Funciones principales del NMS:
+Panel (Panel view): visualización gráfica del estado de LEDs y slots del chasis en tiempo real.
+Device → Slot: acceso a la información detallada de cada tarjeta (versión HW/SW, S/N, fecha de fabricación).
+Device → OTU: configuración de longitud de onda de cada transponder, habilitación del láser (TxEnable), umbral de recepción (RxLow Power threshold).
+Alarm → System Alarm Log: historial completo de alarmas con timestamp, slot afectado y descripción del evento.
+Settings: configuración de parámetros de red del NMS (IP, gateway, DNS).
+
+
+Las dos unidades HT6000 de la maqueta son accesibles en:
+Equipo: DWDM 1 - DWDM 2
+URL de acceso: DWDM 1 http://192.168.1.101/main.html - DWDM 2 http://192.168.1.102/main.html
+Usuario/Contraseña: admin/admin
+
+Procedimiento de uso en el laboratorio
+Desde el PC (192.168.1.10), abrir navegador e ingresar a http://192.168.1.101.
+Autenticarse con usuario admin / contraseña admin.
+Verificar en Panel que los LEDs PWR y RUN están en verde.
+Navegar a Device → Slot M para confirmar la tarjeta NMS activa (Hardware v1.8, Software v5.91).
+Ir a Device → OTU para revisar el estado de cada transponder: Link Status, LOS state, Potencia Rx/Tx, Wavelength.
+En Alarm → System Alarm Log, revisar las alarmas activas. Las alarmas en rojo son activas; las en azul son normalizadas.
+Repetir el proceso en http://192.168.1.102 para el DWDM 2.
+
+
+Fotografías del NMS en operación
+📷 [INSERTAR: dwdm1.png — Interfaz NMS del DWDM 1 (192.168.1.101): pantalla Slot M con información de la tarjeta HT6000-NMS, S/N 25062310289, y tabla de puertos LAN/SFP]
+
+📷 [INSERTAR: dwdm3.png — Interfaz NMS del DWDM 2 (192.168.1.102): pantalla Slot M con información de la tarjeta HT6000-NMS, S/N 25062310290]
+
+📷 [INSERTAR: dwdm2.png — System Alarm Log del HT6000: historial de alarmas OLP y EDFA con timestamps, slots 08, 09 y 17]
+
+
+4. VeEX EZ Remote — Control Remoto desde PC
+Descripción funcional
+VeEX EZ Remote es la plataforma web de VeEX Inc. para el acceso y control remoto de los instrumentos MTX150x y OSA RxT-1200/4510 a través de la red LAN del laboratorio. No requiere instalación de software adicional: opera completamente desde el navegador web mediante la interfaz Web Remote Access embebida en cada equipo.
+
+Desde EZ Remote es posible:
+Visualizar en tiempo real la pantalla del equipo remoto.
+Ejecutar pruebas (RFC 2544, SAM, barrido OSA) desde el PC.
+Guardar capturas de pantalla (Screen Shots) como evidencia.
+Acceder al histórico de resultados almacenados en el equipo (Results).
+Subir perfiles de prueba preconfigurados (Upload Profile).
+
+
+Configuración del acceso remoto
+ParámetroMTX150xOSA RxT-1200Dirección IP192.168.1.100 (acceso web)192.168.1.202URL de accesohttp://192.168.1.100http://192.168.1.202Contraseña de accesopass1pass1Red de gestiónSwitch MikroTik CSS610Switch MikroTik CSS610
+Nota: la IP 192.168.1.100 corresponde al gateway de acceso web del MTX150x (interfaz Web Remote Access). La IP del equipo como instrumento es 192.168.1.201.
+
+
+
+Procedimiento de conexión
+Asegurarse de que el PC está en la red 192.168.1.0/24.
+Abrir navegador → ingresar http://192.168.1.100.
+En la pantalla de inicio de VeEX Web Remote Access, seleccionar Remote Control.
+Se carga la interfaz espejo del MTX150x con todos los botones de control virtual.
+Para el OSA: ingresar http://192.168.1.202 y acceder con contraseña pass1.
+Desde ambas interfaces es posible ejecutar pruebas, capturar pantallas y descargar resultados.
+
+
+Fotografía del software en uso
+
+📷 [INSERTAR: dwdm4.png — Pantalla completa de VeEX Web Remote Access conectado al MTX150x (S/N: TJMA01YB111108), mostrando el menú principal con las opciones Setup, V-SAM, Loopback, RFC 2544, IP, Rendimiento, Herramientas avanzadas y Scan]
