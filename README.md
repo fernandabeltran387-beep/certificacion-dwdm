@@ -1,15 +1,9 @@
-Certificación de Enlace Óptico DWDM — 8 Canales
-Asignatura: Certificación de Cableado Estructurado
-Carrera: Ingeniería en Telecomunicaciones y Servicios Digitales
-Sede: INACAP La Serena
-Docente: Daniel Ruz Moreno
-Plataforma evaluada: HT6000-1U · VeEX RxT-1200/OSA RXT-4510 · VeEX MTX150x
-Integrantes
-Nombres: Fernanda Beltrán - Nelly Antinao - Angélica Rojas.
-
+Certificación de Enlace Óptico DWDM — 8 Canales.
 
 Introducción.
-El presente repositorio constituye la bitácora de ingeniería de la evaluación N.° 2 de la asignatura Certificación de Cableado Estructurado. La actividad consistió en la certificación técnica de un enlace de transporte óptico DWDM de 8 canales, implementado sobre la plataforma HT6000-1U de HTFiberDWDM, con una distancia de fibra simulada de 50 km (dos carretes de 25 km cada uno).
+
+El presente repositorio constituye la bitácora de ingeniería de la evaluación N.° 2 de la asignatura Certificación de Cableado Estructurado. 
+La actividad consistió en la certificación técnica de un enlace de transporte óptico DWDM de 8 canales, implementado sobre la plataforma HT6000-1U de HTFiberDWDM, con una distancia de fibra simulada de 50 km (dos carretes de 25 km cada uno).
 
 El proceso incluyó la operación analógica y remota de instrumental de precisión: el Analizador Óptico de Espectro OSA RXT-4510 (montado sobre chasis RxT-1200) para el barrido espectral DWDM, y el Analizador Ethernet MTX150x de VeEX para la validación del acuerdo de nivel de servicio (SLA) mediante pruebas de rendimiento a 1G.
 
@@ -55,33 +49,30 @@ Diagrama de Bloques de la Maqueta
   PC de gestión: 192.168.1.10
 
 Tabla de Direcciones IP
-
-Equipo: DWDM 1 (HT6000) - DWDM 2 (HT6000) - Analizador Ethernet MTX150x - OSA RxT-1200/4510 - PC de gestión 
-DirecciónIP/Máscara: DWDM 1 (HT6000)192.168.1.101/24 - DWDM 2 (HT6000)192.168.1.102/24 - Analizador Ethernet MTX150x 192.168.1.201/24 - OSA RxT-1200/4510 - PC de gestión 192.168.1.10/24
+EquipoDirección IPMáscaraDWDM 1 (HT6000)192.168.1.101/24DWDM 2 (HT6000)192.168.1.102/24Analizador Ethernet MTX150x192.168.1.201/24OSA RxT-1200/4510192.168.1.202/24PC de gestión192.168.1.10/24
 
 Fotografías de la Maqueta
+
 Vista general del rack de laboratorio
 
+<img width="1200" height="1600" alt="maqueta1" src="https://github.com/user-attachments/assets/e640984d-c534-46eb-a45d-cf5845a09899" />
 
-📷 [INSERTAR: maqueta1.jpeg — Vista frontal del rack completo con todos los equipos montados]
 
 
 
 
 Detalle del cableado óptico y equipos DWDM.
 
-
-📷 [INSERTAR: maqueta2.jpeg — Detalle interior del rack: cableado amarillo, carretes de fibra, HT6000 x2 y ODF]
+<img width="1600" height="1200" alt="maqueta2" src="https://github.com/user-attachments/assets/6cb2cc91-6deb-4951-8cfa-b2a3f7802fd1" />
 
 
 
 
 Instrumental de medición en operación.
 
+<img width="1200" height="1600" alt="maqueta3" src="https://github.com/user-attachments/assets/1354b0ab-a927-4ff1-bc4a-af8a9f9fb149" />
 
-📷 [INSERTAR: maqueta3.jpeg — Vista exterior del rack con OSA RxT-1200 y MTX150x sobre la mesa]
-
-📷 [INSERTAR: dwdm7.jpeg — OSA RxT-1200 y MTX150x operando en simultáneo, con fibras conectadas]
+<img width="668" height="309" alt="dwdm7" src="https://github.com/user-attachments/assets/30cc4fa8-85e4-42f5-89e1-2e6be3e69ca3" />
 
 
 
