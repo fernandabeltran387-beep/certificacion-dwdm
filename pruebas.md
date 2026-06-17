@@ -75,23 +75,6 @@ Criterio PASS/FAIL: PASS si Potencia Rx > −15 dBm, OSNR > 15 dB y |Delta| < 0,
 
 
 
-2.3 Capturas OSA — Canal PASS (C21) y Canal FAIL
-
-Canal C21 — Estado PASS:
-
-
-📷 [INSERTAR: captura OSA mostrando el canal C21 con parámetros dentro del umbral: Potencia Rx dentro de rango, OSNR > 15 dB, Delta dentro de ±0,05 nm]
-
-
-
-Canal en FAIL (si aplica):
-
-
-📷 [INSERTAR: captura OSA mostrando el canal en estado FAIL con los parámetros fuera de rango resaltados. Si se identificó un canal específico en alarma según el log NMS, indicar cuál]
-
-
-
-
 Paso 3 — Validación SLA: Pruebas de Rendimiento Ethernet
 
 3.1 Configuración de la prueba — iPerf3 / RFC 2544
