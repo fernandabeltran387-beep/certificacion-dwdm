@@ -25,9 +25,11 @@ En este laboratorio, los valores de Rx esperados post-fibra de 50 km se sitúan 
 
 2. OSNR — Relación Señal/Ruido Óptico
 
-El OSNR (Optical Signal-to-Noise Ratio) mide la calidad de la señal luminosa respecto al ruido de fondo generado principalmente por la Emisión Espontánea Amplificada (ASE) de los amplificadores EDFA.
+El OSNR (Optical Signal-to-Noise Ratio), mide la calidad de la señal luminosa respecto al ruido de fondo generado principalmente por la Emisión Espontánea Amplificada (ASE) de los amplificadores EDFA.
 
 OSNR (dB)=10⋅log⁡10(Psen~alPruido, 0.1nm)OSNR\ (dB) = 10 \cdot \log_{10}\left(\frac{P_{señal}}{P_{ruido,\ 0.1nm}}\right)OSNR (dB)=10⋅log10​(Pruido, 0.1nm​Psen~al​​)
+
+
 El OSNR se mide en una resolución de ancho de banda de 0,1 nm (convención ITU-T). Para el OSA RXT-4510, este parámetro se obtiene automáticamente en cada barrido espectral.
 
 ¿Por qué un OSNR alto garantiza la integridad de los datos?
