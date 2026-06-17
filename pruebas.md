@@ -94,13 +94,6 @@ Se ejecutó iperf3 en modo servidor sobre el PC de gestión (192.168.1.10) y en 
 
 
 
-Método B — VeEX MTX150x (RFC 2544 / Rendimiento):
-
-
-📷 [INSERTAR: captura de pantalla del MTX150x mostrando los resultados de la prueba RFC 2544 o T-PUT, con los valores de Throughput, Latencia y Frame Loss por tamaño de trama]
-
-
-
 3.2 Tabla de Resultados SLA
 
 ParámetroValor medidoUmbral SLAEstadoThroughput máximo (TCP)~942 Mbits/sec≥ 900 Mbits/sec (1GbE) PASSThroughput promedio (10 seg)~939–942 Mbits/sec≥ 900 Mbits/sec PASSPérdida de paquetes (Frame Loss)0%0% PASSLatencia extremo a extremo< 1 ms (ping)≤ 5 ms PASSTotal transferido (10 seg)1,10 GBytes—Referencia
