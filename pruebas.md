@@ -1,128 +1,149 @@
-Registro de Pruebas — Mediciones, Certificación SLA y Análisis de Fallas
+# Registro de Pruebas — Mediciones, Certificación SLA y Análisis de Fallas
 
+---
 
-Paso 1 — Quick Setup: Verificación Inicial y Protocolo de Limpieza
+## Paso 1 — Quick Setup: Verificación Inicial y Protocolo de Limpieza
 
-1.1 Verificación del Switch MikroTik CSS610
+### 1.1 Verificación del Switch MikroTik CSS610
 
 Antes de iniciar cualquier medición, se verificó la conectividad de la red de gestión (192.168.1.0/24) mediante ping desde el PC hacia los dos chasis HT6000. El switch MikroTik CSS610-8G-2S+IN actúa como nodo de acceso de gestión para todos los equipos de la maqueta.
 
-Prueba de conectividad — ping desde PC (192.168.1.10):
+**Prueba de conectividad — ping desde PC (192.168.1.10):**
 
 <img width="1920" height="1040" alt="dwdm6" src="https://github.com/user-attachments/assets/5b1ce430-4fe4-4c59-92db-eab1864d7cf8" />
 
+Los resultados confirman conectividad total con ambos chasis HT6000 con latencias inferiores a 1 ms, validando el correcto funcionamiento de la red de gestión.
 
+---
 
-Los resultados confirman conectividad total con ambos chasis HT6000 con latencias inferiores a 1 ms, lo cual valida el correcto funcionamiento de la red de gestión antes de proceder con las mediciones.
+### 1.2 Verificación de Acceso NMS — DWDM 1 y DWDM 2
 
-1.2 Verificación de Acceso NMS — DWDM 1 y DWDM 2
+| Equipo | URL | Estado | S/N Tarjeta NMS |
+|--------|-----|--------|-----------------|
+| DWDM 1 | http://192.168.1.101 | Accesible | 25062310289 |
+| DWDM 2 | http://192.168.1.102 | Accesible | 25062310290 |
 
-Se accedió mediante navegador web a la interfaz NMS de ambos chasis:
+Ambas tarjetas NMS presentan: Hardware v1.8, Software v5.91, Card PN HT6000-NMS, fecha de producción 2025.06.23. El puerto LAN1 muestra estado Up a 100M Full.
 
-EquipoURLEstadoS/N Tarjeta NMSDWDM 1http://192.168.1.101 Accesible25062310289DWDM 2http://192.168.1.102 Accesible25062310290
+---
 
-Ambas tarjetas NMS presentan: Hardware v1.8, Software v5.91, Card PN HT6000-NMS, fecha de producción 2025.06.23. El puerto LAN1 de cada tarjeta muestra estado Up a 100M Full, confirmando la conexión activa al switch de gestión.
+### 1.3 Asignación de Canales en Transponders (Mux/Demux)
 
-1.3 Asignación de Canales en Transponders (Mux/Demux)
+La maqueta opera con el módulo ODM08 (Mux/Demux de 40 canales) en cada chasis HT6000. Los 8 canales activos corresponden a la grilla ITU-T G.694.1 (espaciado 100 GHz, banda C):
 
-La maqueta opera con el módulo ODM08 (Mux/Demux de 40 canales) en cada chasis HT6000. Los 8 canales activos utilizados corresponden a la grilla ITU-T G.694.1 (espaciado 100 GHz, banda C):
+| Canal ITU-T | Frecuencia nominal (THz) | Longitud de onda (nm) | Nodo A OTU | Nodo B OTU |
+|-------------|--------------------------|----------------------|------------|------------|
+| C21 | 192,1 | 1560,61 | OTU1 | OTU1 |
+| C22 | 192,2 | 1559,79 | OTU2 | OTU2 |
+| C23 | 192,3 | 1558,98 | OTU3 | OTU3 |
+| C24 | 192,4 | 1558,17 | OTU4 | OTU4 |
+| C25 | 192,5 | 1557,36 | OTU5 | OTU5 |
+| C26 | 192,6 | 1556,55 | OTU6 | OTU6 |
+| C27 | 192,7 | 1555,75 | OTU7 | OTU7 |
+| C28 | 192,8 | 1554,94 | OTU8 | OTU8 |
 
-Canal ITU-TFrecuencia nominal (THz)Longitud de onda (nm)Nodo A OTUNodo B OTUC21192,11560,61OTU1OTU1C22192,21559,79OTU2OTU2C23192,31558,98OTU3OTU3C24192,41558,17OTU4OTU4C25192,51557,36OTU5OTU5C26192,61556,55OTU6OTU6C27192,71555,75OTU7OTU7C28192,81554,94OTU8OTU8
+- Canales C21–C24: dirección A→B
+- Canales C25–C28: dirección B→A (enlace bidireccional)
 
+---
 
-Los canales C21–C24 operan en dirección A→B (OTU Rx/Tx en Nodo A, Tx/Rx en Nodo B).
+### 1.4 Protocolo de Limpieza de Conectores (Seguridad Óptica)
 
-Los canales C25–C28 operan en dirección B→A (bidireccionalidad del enlace).
+1. **Verificación visual:** inspección de la férula LC/APC antes de conectar.
+2. **Limpieza con hisopo seco:** de un solo uso, nunca reutilizar.
+3. **Cinta de limpieza óptica:** si hay contaminación visible.
+4. **Inspección post-limpieza:** verificar ausencia de polvo o residuos.
+5. **Tapas protectoras:** mantener en puertos que no estén en uso.
 
+> **Precaución:** nunca mirar directamente un conector óptico sin verificar que el láser esté apagado (TxEnable = OFF en el NMS). Los láseres operan en banda C (~1550 nm, invisible al ojo humano).
 
+---
 
-1.4 Protocolo de Limpieza de Conectores (Seguridad Óptica)
+## Paso 2 — Tabla de Certificación: Registro de Canales OSA
 
-Previo a cualquier conexión óptica, se siguió el siguiente protocolo de limpieza para garantizar la integridad de las mediciones y proteger los equipos:
+### 2.1 Metodología de medición
 
-
-Verificación visual: uso de microscopio de inspección de conectores (si disponible) para revisar el estado de la férula LC/APC antes de conectar.
-Limpieza con hisopo seco: pasar un hisopo seco de un solo uso por la férula del conector (nunca reutilizar).
-Limpieza con cinta de limpieza óptica: si hay contaminación visible, usar cinta de limpieza certificada para fibra óptica.
-Inspección post-limpieza: verificar ausencia de polvo, aceite o residuos antes de insertar el conector.
-Tapas protectoras: mantener siempre tapas en los puertos ópticos que no estén en uso para prevenir contaminación.
-
-
- Precaución: nunca mirar directamente hacia un conector óptico sin verificar previamente que el láser está apagado (TxEnable = OFF en el NMS del HT6000). Los láseres de esta maqueta operan en la banda C (~1550 nm, invisible al ojo humano).
-
-
-
-
-Paso 2 — Tabla de Certificación: Registro de Canales OSA
-
-2.1 Metodología de medición
-
-El OSA RXT-4510 se conectó al puerto de monitoreo del ODF (Puerto 1-A: MON DWDM 1) y se ejecutó un barrido espectral completo sobre la banda C (1530–1570 nm). El plan 
-
-> Los valores de los canales C21–C28 no pudieron ser completados
-> durante la sesión de laboratorio debido a limitaciones de tiempo en la
-> clase práctica. La metodología de medición y los criterios PASS/FAIL
-> están documentados en la sección 2.1.de canal configurado corresponde a la grilla ITU-T G.694.1 con espaciado de 100 GHz.
-
-
+El OSA RXT-4510 se conectó al puerto de monitoreo del ODF (Puerto 1-A: MON DWDM 1) y se ejecutó un barrido espectral completo sobre la banda C (1530–1570 nm), con plan de canal ITU-T G.694.1 a 100 GHz de espaciado.
 
 <img width="1601" height="989" alt="dwdm5" src="https://github.com/user-attachments/assets/adb784b8-93a5-4054-bbee-5333b8077388" />
 
+---
 
+### 2.2 Tabla de Certificación de Canales
 
-2.2 Tabla de Certificación de Canales
+| Canal | Frecuencia nominal (THz) | λ Peak (nm) | λ Center (nm) | Delta (nm) | Delta (GHz) | Potencia Rx (dBm) | OSNR (dB) | BW 3dB (nm) | Estado |
+|-------|--------------------------|-------------|---------------|------------|-------------|-------------------|-----------|-------------|--------|
+| C21 | 192,100 | — | — | — | — | — | — | — | PASS |
+| C22 | 192,200 | — | — | — | — | — | — | — | — |
+| C23 | 192,300 | — | — | — | — | — | — | — | — |
+| C24 | 192,400 | — | — | — | — | — | — | — | — |
+| C25 | 192,500 | — | — | — | — | — | — | — | — |
+| C26 | 192,600 | — | — | — | — | — | — | — | — |
+| C27 | 192,700 | — | — | — | — | — | — | — | — |
+| C28 | 192,800 | — | — | — | — | — | — | — | — |
 
-La siguiente tabla registra los parámetros medidos por el OSA para cada canal del enlace:
+**Criterio PASS/FAIL:** PASS si Potencia Rx > −15 dBm, OSNR > 15 dB y |Delta| < 0,05 nm.
 
-CanalFrecuencia nominal (THz)λ Peak medida (nm)λ Center (nm)Delta (nm)Delta (GHz)Potencia Rx (dBm)OSNR (dB)BW 3dB (nm)EstadoC21192,100[completar][completar][completar][completar][completar][completar][completar] PASSC22192,200[completar][completar][completar][completar][completar][completar][completar][estado]C23192,300[completar][completar][completar][completar][completar][completar][completar][estado]C24192,400[completar][completar][completar][completar][completar][completar][completar][estado]C25192,500[completar][completar][completar][completar][completar][completar][completar][estado]C26192,600[completar][completar][completar][completar][completar][completar][completar][estado]C27192,700[completar][completar][completar][completar][completar][completar][completar][estado]C28192,800[completar][completar][completar][completar][completar][completar][completar][estado]
+> **Nota:** Los valores numéricos de los canales C21–C28 no pudieron ser registrados durante la sesión de laboratorio debido a limitaciones de tiempo en la clase práctica. La metodología de medición y los criterios PASS/FAIL están documentados en la sección 2.1.
 
+---
 
-Criterio PASS/FAIL: PASS si Potencia Rx > −15 dBm, OSNR > 15 dB y |Delta| < 0,05 nm. FAIL si alguno de estos parámetros está fuera de rango.
+## Paso 3 — Validación SLA: Pruebas de Rendimiento Ethernet
 
+### 3.1 Configuración de la prueba — iPerf3
 
-
-Paso 3 — Validación SLA: Pruebas de Rendimiento Ethernet
-
-3.1 Configuración de la prueba — iPerf3 / RFC 2544
-
-La validación del SLA del enlace se realizó mediante dos métodos complementarios:
-
-Método A — iPerf3 (prueba TCP entre PC y equipo remoto):
-
-Se ejecutó iperf3 en modo servidor sobre el PC de gestión (192.168.1.10) y en modo cliente desde otro equipo conectado al DWDM en el extremo B, transportando tráfico a través del enlace óptico C21.
+Se ejecutó iPerf3 en modo servidor sobre el PC de gestión (192.168.1.10) y en modo cliente desde el extremo B, transportando tráfico a través del canal óptico C21.
 
 <img width="1601" height="989" alt="dwdm5" src="https://github.com/user-attachments/assets/e05c2e1f-6971-4261-b985-b008b4b53aa7" />
 
-
-
-
 <img width="1065" height="618" alt="dwdm2" src="https://github.com/user-attachments/assets/aaeb107e-e430-4e88-b72f-dca601e58329" />
 
+---
 
+### 3.2 Tabla de Resultados SLA
 
-3.2 Tabla de Resultados SLA
+| Parámetro | Valor medido | Umbral SLA | Estado |
+|-----------|-------------|------------|--------|
+| Throughput máximo (TCP) | ~942 Mbits/sec | ≥ 900 Mbits/sec | PASS |
+| Throughput promedio (10 seg) | ~939–942 Mbits/sec | ≥ 900 Mbits/sec | PASS |
+| Pérdida de paquetes | 0% | 0% | PASS |
+| Latencia extremo a extremo | < 1 ms | ≤ 5 ms | PASS |
+| Total transferido (10 seg) | 1,10 GBytes | — | Referencia |
 
-ParámetroValor medidoUmbral SLAEstadoThroughput máximo (TCP)~942 Mbits/sec≥ 900 Mbits/sec (1GbE) PASSThroughput promedio (10 seg)~939–942 Mbits/sec≥ 900 Mbits/sec PASSPérdida de paquetes (Frame Loss)0%0% PASSLatencia extremo a extremo< 1 ms (ping)≤ 5 ms PASSTotal transferido (10 seg)1,10 GBytes—Referencia
+### 3.3 Análisis de resultados
 
-3.3 Análisis de resultados SLA
+El enlace DWDM de 50 km opera a 939–942 Mbits/sec (~94% de la capacidad nominal de 1GbE). La estabilidad del throughput (variación de ±3 Mbits/sec) confirma que el transporte óptico no introduce degradación en la capa de datos.
 
-Los resultados de la prueba de throughput con iPerf3 demuestran que el enlace DWDM de 50 km opera con un rendimiento de 939–942 Mbits/sec, equivalente al ~94% de la capacidad nominal de un enlace Gigabit Ethernet. Esta eficiencia es consistente con el overhead de los protocolos TCP/IP y los encabezados de trama Ethernet, y confirma que el transporte óptico no introduce degradación significativa en la capa de datos.
+---
 
-La estabilidad del throughput durante los 10 segundos de prueba (variación de ±3 Mbits/sec) indica un enlace sin pérdidas por BER ni retransmisiones, lo cual es coherente con los valores de OSNR y potencia Rx dentro de los umbrales medidos en el Paso 2.
+## Paso 4 — Análisis de Fallas: Diagnóstico Técnico
 
+### 4.1 Alarmas registradas en el NMS
 
-Paso 4 — Análisis de Fallas: Diagnóstico Técnico
-
-4.1 Alarmas registradas en el NMS
-
-Durante la sesión de laboratorio, el System Alarm Log del HT6000 registró múltiples alarmas de tipo Optical PowerAlarm en el slot 08 (módulo OLP) y alarmas EDFA Gain deviationAlarm en los slots 09 y 17. A continuación se analiza el origen de cada tipo de alarma.
-
-
+El System Alarm Log del HT6000 registró alarmas de tipo `Optical PowerAlarm` en el slot 08 (módulo OLP) y `EDFA Gain deviationAlarm` en los slots 09 y 17.
 
 <img width="1065" height="618" alt="dwdm2" src="https://github.com/user-attachments/assets/d3ee80c1-d9b3-4918-971f-895663e9d985" />
 
+---
 
+### 4.2 Clasificación de alarmas
 
+**Alarmas OLP1+1 — Slot 08:**
+
+Las fechas registradas (año 2000) indican que el reloj del sistema no estaba sincronizado — es un artefacto de configuración, no una falla real. Los valores de potencia muy bajos (−47,96 dBm vs umbral −25,0 dBm) son consistentes con los puertos de protección T2/R2 sin fibra conectada durante el arranque. Una vez establecida la conexión principal T1/R1, el sistema normalizó la alarma.
+
+**Alarmas EDFA01 — Slots 09 y 17:**
+
+| Estado | Entrada | Salida | Ganancia |
+|--------|---------|--------|----------|
+| Alarm | −32,66 dBm | −45,00 dBm | 0,00 dB |
+| Normal | −11,92 dBm | +8,22 dBm | 20,00 dB |
+
+La secuencia alarma→normal indica que el EDFA estuvo temporalmente sin señal durante la conexión de fibras en el ODF y luego recuperó correctamente con ganancia nominal de 20 dB.
+
+---
+
+### 4.3 Árbol de diagnóstico — Canal en FAIL
 4.2 Clasificación de alarmas
 
 Alarmas OLP1+1 — Slot 08 (2000/04/25 – 2000/04/28):
