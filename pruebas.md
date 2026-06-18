@@ -57,7 +57,13 @@ Paso 2 — Tabla de Certificación: Registro de Canales OSA
 
 2.1 Metodología de medición
 
-El OSA RXT-4510 se conectó al puerto de monitoreo del ODF (Puerto 1-A: MON DWDM 1) y se ejecutó un barrido espectral completo sobre la banda C (1530–1570 nm). El plan de canal configurado corresponde a la grilla ITU-T G.694.1 con espaciado de 100 GHz.
+El OSA RXT-4510 se conectó al puerto de monitoreo del ODF (Puerto 1-A: MON DWDM 1) y se ejecutó un barrido espectral completo sobre la banda C (1530–1570 nm). El plan 
+
+> Los valores de los canales C21–C28 no pudieron ser completados
+> durante la sesión de laboratorio debido a limitaciones de tiempo en la
+> clase práctica. La metodología de medición y los criterios PASS/FAIL
+> están documentados en la sección 2.1.de canal configurado corresponde a la grilla ITU-T G.694.1 con espaciado de 100 GHz.
+
 
 
 <img width="1601" height="989" alt="dwdm5" src="https://github.com/user-attachments/assets/adb784b8-93a5-4054-bbee-5333b8077388" />
