@@ -1,9 +1,9 @@
 # Certificación de Enlace Óptico DWDM — 8 Canales
-Integrantes: Nelly Antinao, Fernanda Beltrán y Angélica Rojas
+Integrantes: Nelly Antinao, Fernanda Beltrán y Angélica Rojas.
 
-Asignatura: Certificación de cableado estructurado
+Asignatura: Certificación de cableado estructurado.
 
-Docente: Daniel Ruz
+Docente: Daniel Ruz.
 
 
 ## Introducción
