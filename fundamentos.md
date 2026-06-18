@@ -55,7 +55,7 @@ En la maqueta se utilizan dos carretes de 25 km cada uno, conectados en serie a 
 
 Estimación del presupuesto de pérdidas total
 
-ComponentePérdida estimadaFibra óptica (2 × 25 km @ 0,2 dB/km)~10,0 dBConectores LC/APC en ODF (4 conexiones × 0,3 dB) 1,2 dBPérdida inserción Mux/Demux ODM08~3,0–4,0 dBMargen de sistema recomendado3,0 dBPresupuesto total estimado 17–18 dB
+ComponentePérdida estimadaFibra óptica (2 × 25 km @ 0,2 dB/km) 10,0 dBConectores LC/APC en ODF (4 conexiones × 0,3 dB) 1,2 dBPérdida inserción Mux/Demux ODM08 3,0–4,0 dBMargen de sistema recomendado3,0 dBPresupuesto total estimado 17–18 dB
 
 
 El atenuador óptico variable JW3303 instalado en la maqueta permite ajustar la atenuación del enlace de forma controlada para simular diferentes condiciones de planta y verificar los umbrales de alarma del sistema.
