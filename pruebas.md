@@ -205,6 +205,3 @@ Las macrocurvaturas son especialmente perjudiciales en sistemas DWDM porque gene
 
 
 
-Resumen Final de Certificación
-
-ComponenteEstadoObservacionesConectividad red gestión PASSPing < 1 ms a DWDM1 y DWDM2Acceso NMS DWDM1 PASShttp://192.168.1.101, SW v5.91Acceso NMS DWDM2 PASShttp://192.168.1.102, SW v5.91Acceso VeEX EZ Remote PASShttp://192.168.1.100, MTX150x onlineBarrido OSA RXT-4510 Ejecutado8 canales detectados en banda CCanal C21 PASS[completar con valores medidos]Canal C22[estado][completar]Canal C23–C28[estado][completar]Throughput Ethernet PASS~942 Mbits/sec, 0% pérdidaLatencia PASS< 1 ms extremo a extremoAlarmas activas al cierre RevisarVer log NMS para alarmas OLP/EDFA residuales
