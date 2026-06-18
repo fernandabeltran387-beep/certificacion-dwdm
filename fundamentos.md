@@ -1,4 +1,4 @@
-# Fundamentos Técnicos — Parámetros Críticos del Enlace DWDM
+# Fundamentos Técnicos — Parámetros Críticos del Enlace DWDM.
 
 ## 1. Potencia Óptica (dBm)
 
