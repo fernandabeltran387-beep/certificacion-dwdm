@@ -2,7 +2,7 @@
 
 ## 1. Chasis RxT-1200 + Módulo OSA RXT-4510
 
-### Descripción funcional
+### Descripción funcional:
 
 El VeEX RxT-1200 es un chasis de instrumentación modular portátil. En esta maqueta porta el módulo OSA RXT-4510, un Analizador Óptico de Espectro (OSA) diseñado específicamente para el análisis de sistemas DWDM en banda C y L.
 
