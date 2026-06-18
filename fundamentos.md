@@ -78,6 +78,4 @@ Una deriva excesiva puede provocar interferencia entre canales adyacentes (*cros
 
 > **Conversión práctica:** para la banda C, 1 GHz ≈ 0,008 nm a 1550 nm. Herramienta de conversión THz ↔ nm: [unitconverters.net](https://www.unitconverters.net/)
 
----
 
-*Documento de fundamentación técnica — Evaluación 2, Certificación DWDM.*
